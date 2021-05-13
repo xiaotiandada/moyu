@@ -1,0 +1,13 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "SCF Remote Debugger for Node10+ - egg_component_s9y80m",
+			"type": "node",
+			"request": "attach",
+			"port": 9222,
+			"localRoot": "${workspaceFolder}/egg_component_s9y80m/src",
+			"remoteRoot": "/var/user"
+		}
+	]
+}
