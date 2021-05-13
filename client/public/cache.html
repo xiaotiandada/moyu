@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cache</title>
+  <!-- 如果有两个相同的link css，设置 no-store情况下也只会加载测试 -->
+  <!-- 在Chrome挨在一起放 Network只会有一个请求。如果分开则有多个请求。 -->
+  <!-- 在Firfox挨在一起放和分开放都只会有一个请求 -->
+  <link rel="stylesheet" href="http://localhost:7001/static/index.css">
+  <script src="http://localhost:7001/static/index.js"></script>
+  <link rel="stylesheet" href="http://localhost:7001/static/index.css">
+  <script src="http://localhost:7001/static/index.js"></script>
+</head>
+
+<body>
+  Cache
+  <img src="http://localhost:7001/static/index.png" alt="image">
+  <img src="http://localhost:7001/static/index.png" alt="image">
+  <!-- 异步请求图片 -->
+  <script>
+    setTimeout(function () {
+      let img = document.createElement('img')
+      img.src = 'http://localhost:7001/static/index.png'
+      document.body.appendChild(img)
+    }, 1000)
+  </script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      // Register a service worker hosted at the root of the
+      // site using the default scope.
+      navigator.serviceWorker.register('/sw.js').then(function (registration) {
+        console.log('Service worker registration succeeded:', registration);
+      }, /*catch*/ function (error) {
+        console.log('Service worker registration failed:', error);
+      });
+    } else {
+      console.log('Service workers are not supported.');
+    }
+  </script>
+</body>
+
+</html>

@@ -14,7 +14,7 @@ export default (app: Application) => {
   // router.post('/api/buy', controller.mq.buy);
 
   // 小说 www.ptwxz.com
-  router.get('/ptwxz', controller.ptwxz.index);
-  router.get('/ptwxz/detail', controller.ptwxz.get);
+  router.get('/api/ptwxz', controller.ptwxz.index);
+  router.get('/api/ptwxz/detail', controller.ptwxz.get);
 
 };
