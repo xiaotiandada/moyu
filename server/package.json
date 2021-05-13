@@ -7,7 +7,7 @@
     "declarations": true
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=egg-server-moyu",
+    "start": "egg-scripts start --port=6000 --daemon --title=egg-server-moyu",
     "stop": "egg-scripts stop --title=egg-server-moyu",
     "dev": "egg-bin dev",
     "debug": "egg-bin debug",
