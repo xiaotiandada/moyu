@@ -11,6 +11,7 @@ export default class Test extends Service {
 
   private async fetchPage(url: string) {
     try {
+      console.log('env', this.app.env);
       const configProxyFn = () => {
         const agent = tunnel.httpsOverHttp({
           proxy: {
@@ -33,7 +34,15 @@ export default class Test extends Service {
         httpsAgent: configProxy.httpsAgent,
         proxy: configProxy.proxy,
       });
-      return await axios(axiosConfig);
+      if (this.app.env === 'local') {
+        return await axios(axiosConfig);
+      }
+      return await axios({
+        url,
+        method: 'get',
+        responseType: 'arraybuffer',
+      });
+
     } catch (e) {
       console.error(e);
       return false;
