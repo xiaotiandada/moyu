@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { ptwxz } from '../../api/index'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import Footer from '../../components/Footer'
