@@ -19,6 +19,9 @@ export function testCacheA(params: any) {
 export function ptwxz() {
   return client.get('/api/ptwxz')
 }
+export function ptwxzList(params: { id: string }) {
+  return client.get('/api/ptwxz/list', { params })
+}
 export function ptwxzDetail(params: ptwxzDetailProps) {
   return client.get('/api/ptwxz/detail', { params })
 }

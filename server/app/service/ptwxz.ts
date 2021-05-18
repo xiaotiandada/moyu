@@ -3,6 +3,7 @@ import * as cheerio from 'cheerio';
 import axios from 'axios';
 import * as tunnel from 'tunnel';
 import * as iconv from 'iconv-lite';
+import { isEmpty } from 'lodash';
 
 /**
  * Test Service
@@ -81,6 +82,41 @@ export default class Test extends Service {
       return {
         code: 0,
         data,
+      };
+    } catch (e) {
+      console.error(e);
+      return {
+        code: -1,
+        message: e.toString(),
+      };
+    }
+  }
+  public async list({ id }) {
+    try {
+      const res: any = await this.fetchPage(`https://www.ptwxz.com/html/${id}`);
+      if (res.status !== 200) {
+        throw new Error('status is not 200');
+      }
+      const r = iconv.decode(res.data, 'gb2312');
+      const $ = cheerio.load(r);
+
+      const listData: { id: string, href: string, name: string }[] = [];
+      $('ul li').each((_, el) => {
+        // console.log('el', $(el).text());
+        const name = $(el).text();
+        const href = $(el).find('a').attr('href') || '';
+        if (!isEmpty(href) || !isEmpty(name.trim())) {
+          listData.push({
+            id: href.replace('.html', ''),
+            href,
+            name: name.trim(),
+          });
+        }
+      });
+
+      return {
+        code: 0,
+        data: listData,
       };
     } catch (e) {
       console.error(e);

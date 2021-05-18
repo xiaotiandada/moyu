@@ -1,107 +1,59 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from "react-redux";
-import { useTranslation } from 'react-i18next';
+import React, { useEffect, useState } from 'react'
+import { ptwxz } from '../../api/index'
+import { Link } from 'react-router-dom'
+
 import styled from 'styled-components'
 
-import { selectUser, selectMode, initUser, setUser, setMode } from '../../store/userSlice';
-import logo from '../../logo.svg';
-import { testCache, testCacheA } from '../../api/index'
+const HomePage: React.FC = () => {
 
-
-const StyledTitle = styled.h1`
-  color: ${({ theme }) => theme.text1};
-`
-const StyledText = styled.p`
-  color: ${({ theme }) => theme.text1};
-`
-
-
-const Home: React.FC = () => {
-  const user: any = useSelector(selectUser)
-  const storeThemeMode: any = useSelector(selectMode)
-  const dispatch = useDispatch()
-
-  const { t, i18n } = useTranslation();
+  const [list, setList] = useState<any[]>([])
 
   useEffect(() => {
-    dispatch(initUser())
-  }, [ dispatch ])
 
-  useEffect(() => {
-    setTimeout(() => {
-      console.log('useEffect user', user)
-    }, 300)
-  }, [ user ])
+    const fetch = async () => {
+      const res: any = await ptwxz()
+      console.log('res', res)
+      if (res.code === 0) {
+        setList(res.data)
+      }
+    }
 
-  const handleClear = () => {
-    dispatch(setUser({}))
-  }
-  const handleInit = () => {
-    dispatch(initUser())
-  }
+    fetch()
+  }, []);
 
-  // test api request
-  const handleTestCache = async () => {
-    const res = await testCache({
-      pagesize: 20
-    })
-      console.log('data res', res)
-  }
-  const handleTestCache1 = async () => {
-    const res = await testCache({
-      pagesize: 30
-    })
-      console.log('data res 1', res)
-  }
-  const handleTestCacheA = async () => {
-    const res = await testCacheA({
-      pagesize: 30
-    })
-      console.log('data res 1', res)
-  }
-
-  function GenericBox({ children }: any) {
-    console.log('children', children)
-    return <div className="container">{children}</div>
-  }
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <StyledTitle>{t('swap')}</StyledTitle>
-        <StyledText>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </StyledText>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <StyledText>Theme Mode: { storeThemeMode }</StyledText>
-        <br/>
-        <GenericBox>
-          <span>Hello</span> <span>World</span>
-        </GenericBox>
-        <div>
-          <button onClick={ handleInit }>init</button>
-          <button onClick={ handleClear }>clear</button>
-          <button onClick={ () => i18n.changeLanguage('en') }>en</button>
-          <button onClick={ () => i18n.changeLanguage('zh-CN') }>zh</button>
-          <button onClick={ () => dispatch(setMode({ mode: 'defaultMode' })) }>Default Mode</button>
-          <button onClick={ () => dispatch(setMode({ mode: 'darkMode' })) }>Dark Mode</button>
-        </div>
-        <div>
-          <button onClick={ handleTestCache }>Test Cache</button>
-          <button onClick={ handleTestCache1 }>Test Cache 1</button>
-          <button onClick={ handleTestCacheA }>Test No Cache</button>
-        </div>
-      </header>
-    </div>
-  );
+    <StyledItem>
+      {
+        list.map((i, idx) => (
+          <Link key={idx} to={`/${encodeURIComponent(i.id)}`}>
+            <StyledItemLi>{i.name}</StyledItemLi>
+          </Link>
+        ))
+      }
+    </StyledItem>
+  )
 }
 
-export default Home;
+const StyledItem = styled.ul`
+  margin: 0;
+  padding: 10px;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-row-gap: 10px;
+  grid-column-gap: 10px;
+`
+const StyledItemLi = styled.li`
+  border: 1px solid #f1f1f1;
+  /* width: 100px; */
+  height: 160px;
+  font-size: 14px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+`
+
+export default HomePage

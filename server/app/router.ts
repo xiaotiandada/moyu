@@ -15,6 +15,7 @@ export default (app: Application) => {
 
   // 小说 www.ptwxz.com
   router.get('/api/ptwxz', controller.ptwxz.index);
+  router.get('/api/ptwxz/list', controller.ptwxz.list);
   router.get('/api/ptwxz/detail', controller.ptwxz.get);
 
 };
