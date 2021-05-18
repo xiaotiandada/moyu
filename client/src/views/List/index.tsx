@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ptwxz, ptwxzDetail } from '../../api/index'
+import { ptwxz } from '../../api/index'
 
 import styled from 'styled-components'
 
