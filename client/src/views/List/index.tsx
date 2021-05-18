@@ -21,7 +21,7 @@ const ListPage: React.FC = () => {
     }
 
     fetch()
-  }, []);
+  }, [id]);
 
 
   return (
