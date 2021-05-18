@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { ptwxz } from '../../api/index'
 import { Link } from 'react-router-dom'
-
 import styled from 'styled-components'
+import Footer from '../../components/Footer'
 
 const HomePage: React.FC = () => {
 
@@ -31,13 +31,14 @@ const HomePage: React.FC = () => {
           </Link>
         ))
       }
+      <Footer></Footer>
     </StyledItem>
   )
 }
 
 const StyledItem = styled.ul`
   margin: 0;
-  padding: 10px;
+  padding: 10px 10px 65px;
   list-style: none;
   display: grid;
   grid-template-columns: repeat(3, 1fr);

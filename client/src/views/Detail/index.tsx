@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import styled from 'styled-components'
 import { useParams, useHistory } from 'react-router-dom'
-import { Button, Slider, message, Space } from 'antd'
+import { Button, Slider, message, Space, BackTop } from 'antd'
 import { ptwxzDetail } from '../../api/index'
 
 const ListPage: React.FC = () => {
   const [detail, setDetail] = useState<any>()
   const [fontSize, setFontSize] = useState<number>(1)
+  const [fontSizeVisable, setFontSizeVisable] = useState<Boolean>(false)
   let { id, page } = useParams<{ id: string, page: string }>();
   let history = useHistory();
 
@@ -60,7 +61,7 @@ const ListPage: React.FC = () => {
 
   return (
     <StyledWrapper>
-      <StyledMd style={{ fontSize: fontSizeStyle }} dangerouslySetInnerHTML={{__html: detail?.content}}></StyledMd>
+      <StyledMd style={{ fontSize: fontSizeStyle }} dangerouslySetInnerHTML={{ __html: detail?.content }}></StyledMd>
       <StyledFixed>
         <Space>
           <Button type="primary" onClick={prev}>{
@@ -70,10 +71,17 @@ const ListPage: React.FC = () => {
             detail?.next.id ? 'Next' : 'Not'
           }</Button>
         </Space>
-        <StyledSlider>
-          <Slider style={{ width: 160 }} defaultValue={fontSize} max={5} min={0} onChange={handleChange} />
-        </StyledSlider>
+        <Space>
+          <Button onClick={() => setFontSizeVisable(!fontSizeVisable)}>A</Button>
+        </Space>
+        {
+          fontSizeVisable ? <StyledSlider>
+            <Slider style={{ width: 180 }} defaultValue={fontSize} max={5} min={0} onChange={handleChange} />
+            <span>{fontSizeStyle}</span>
+          </StyledSlider> : null
+        }
       </StyledFixed>
+      <BackTop />
     </StyledWrapper>
   )
 }
@@ -101,6 +109,15 @@ const StyledFixed = styled.div`
 const StyledSlider = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 70px;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-top: 1px solid #f1f1f1;
+  border-bottom: 1px solid #f1f1f1;
+  padding: 4px 20px;
 `
 
 export default ListPage
