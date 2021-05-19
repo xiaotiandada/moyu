@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useParams, useHistory } from 'react-router-dom'
 import { Button, Slider, message, Space, BackTop } from 'antd'
 import { ptwxzDetail } from '../../api/index'
+import store from 'store'
 
 const ListPage: React.FC = () => {
   const [detail, setDetail] = useState<any>()
@@ -21,6 +22,25 @@ const ListPage: React.FC = () => {
       console.log('res', res)
       if (res.code === 0) {
         setDetail(res.data)
+
+        let historyStore = store.get('history') || []
+        let data = {
+          title: res.data.title,
+          subtitle: res.data.subtitle,
+          id: res.data.id,
+          page: res.data.page,
+        }
+
+        let idx  = historyStore.findIndex((i: any) => decodeURIComponent(i.id) === decodeURIComponent(id))
+        if (~idx) {
+          console.log('已存在')
+          historyStore[idx] = data
+        } else {
+          historyStore.push(data)
+        }
+
+        store.set('history', historyStore)
+
       }
     }
 

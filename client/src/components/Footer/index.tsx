@@ -7,9 +7,9 @@ const Footer: React.FC = () => {
   return (
     <StyledWrapper>
       <Link to={'/'}>首页</Link>
-      <Link to={'/'}>书架</Link>
+      <Link to={'/bookshelf'}>书架</Link>
       <Link to={'/custom'}>自定义</Link>
-      <Link to={'/'}>我的</Link>
+      <Link to={'/history'}>我的</Link>
     </StyledWrapper>
   )
 }

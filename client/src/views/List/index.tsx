@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { ptwxzList } from '../../api/index'
 import { Link, useParams } from 'react-router-dom'
-
+import Footer from '../../components/Footer'
 import styled from 'styled-components'
 
 const ListPage: React.FC = () => {
@@ -29,12 +29,13 @@ const ListPage: React.FC = () => {
       {
         list.map((i, idx) => (
           <Link key={idx} to={{
-            pathname: `/${id}/${i.id}`,
+            pathname: `/${encodeURIComponent(id)}/${i.id}`,
           }}>
             <StyledItemLi>{i.name}</StyledItemLi>
           </Link>
         ))
       }
+      <Footer></Footer>
     </StyledItem>
   )
 }

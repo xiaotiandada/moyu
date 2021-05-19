@@ -152,10 +152,23 @@ export default class Test extends Service {
       $('#Commenddiv').remove();
       $('#feit2').remove();
 
+      const metaObj:any = {};
+      $('head meta').each((_, el: any) => {
+        const name = $(el).attr('name') || '';
+        const content = $(el).attr('content') || '';
+        if (name && content) {
+          metaObj[name] = content;
+        }
+      });
+
       return {
         code: 0,
         data: {
+          title: metaObj.keywords || '',
+          subtitle: $('body h1').text(),
           content: $('body').html(),
+          id,
+          page,
           prev: {
             id: firstPrevId,
             text: $('.bottomlink a').first().text(),
