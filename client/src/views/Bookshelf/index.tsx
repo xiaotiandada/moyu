@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Footer from '../../components/Footer'
 import store from 'store'
-
+import { Empty } from 'antd'
+import { isEmpty } from 'lodash'
 
 const HomePage: React.FC = () => {
 
@@ -18,22 +19,30 @@ const HomePage: React.FC = () => {
 
 
   return (
-    <StyledItem>
+    <StyledWrapper>
       {
-        list.map((i, idx) => (
-          <Link key={idx} to={`/${encodeURIComponent(i.id)}/${i.page}`}>
-            <StyledItemLi>{i.title}</StyledItemLi>
-          </Link>
-        ))
+        !isEmpty(list) ? <StyledItem>
+        {
+          list.map((i, idx) => (
+            <Link key={idx} to={`/${encodeURIComponent(i.id)}/${i.page}`}>
+              <StyledItemLi>{i.title}</StyledItemLi>
+            </Link>
+          ))
+        }
+        </StyledItem> : <Empty description={'暂无书籍 📚'} />
       }
       <Footer></Footer>
-    </StyledItem>
+    </StyledWrapper>
+
   )
 }
+const StyledWrapper = styled.div`
+  padding: 10px 10px 65px;
+`
 
 const StyledItem = styled.ul`
   margin: 0;
-  padding: 10px 10px 65px;
+  padding: 0;
   list-style: none;
   display: grid;
   grid-template-columns: repeat(3, 1fr);

@@ -52,7 +52,7 @@ export default class Test extends Service {
 
   public async index() {
     try {
-      const res: any = await this.fetchPage('https://www.ptwxz.com');
+      const res: any = await this.fetchPage(this.config.urlList.ptwxz);
       if (res.status !== 200) {
         throw new Error('status is not 200');
       }
@@ -93,7 +93,7 @@ export default class Test extends Service {
   }
   public async list({ id }) {
     try {
-      const res: any = await this.fetchPage(`https://www.ptwxz.com/html/${id}`);
+      const res: any = await this.fetchPage(`${this.config.urlList.ptwxz}/html/${id}`);
       if (res.status !== 200) {
         throw new Error('status is not 200');
       }
@@ -132,7 +132,7 @@ export default class Test extends Service {
   }) {
     console.log('id', id, page);
     try {
-      const res: any = await this.fetchPage(`https://www.ptwxz.com/html/${id}/${page}.html`);
+      const res: any = await this.fetchPage(`${this.config.urlList.ptwxz}/html/${id}/${page}.html`);
       if (res.status !== 200) {
         throw new Error('status is not 200');
       }

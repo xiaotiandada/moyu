@@ -44,5 +44,10 @@ export default () => {
     agent: false,
   };
 
+  // 数据地址
+  config.urlList = {
+    ptwxz: 'https://www.ptwxz.com',
+  };
+
   return config;
 };
