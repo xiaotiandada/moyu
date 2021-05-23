@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Menu, Dropdown, message } from 'antd';
 import { ptwxzDetail } from '../../api/index'
 import store from 'store'
+import { MenuOutlined, HomeOutlined } from '@ant-design/icons'
 
 const Header: React.FC = () => {
   let { id, page } = useParams<{ id: string, page: string }>();
@@ -42,26 +43,31 @@ const Header: React.FC = () => {
 
         store.set('history', historyStore)
       }
+    } else if (key === 'github') {
+      window.open('https://github.com/xiaotiandada/moyu')
     }
   };
 
-  const menu = (
+  const menu = () => (
     <Menu onClick={onClick}>
-      <Menu.Item disabled>
-        分享
-      </Menu.Item>
       <Menu.Item key="add">
         加入书架
       </Menu.Item>
+      <Menu.Item key="github">
+        Github
+      </Menu.Item>
     </Menu>
-  );
+  )
 
   return (
     <StyledWrapper>
-      <Link to={'/'}>首页</Link>
-
+      <Link to={'/'}>
+        <HomeOutlined />
+      </Link>
       <Dropdown overlay={menu}>
-        <span>更多</span>
+        <StyledMore>
+          <MenuOutlined />
+        </StyledMore>
       </Dropdown>
 
     </StyledWrapper>
@@ -80,9 +86,12 @@ const StyledWrapper = styled.div`
   align-items: center;
   background-color: #fff;
   box-sizing: border-box;
+  height: 40px;
   a {
     font-size: 14px;
     color: #333;
   }
 `
+
+const StyledMore = styled.div``
 export default Header

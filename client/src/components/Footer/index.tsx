@@ -1,15 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
-
 const Footer: React.FC = () => {
+
+  let location = useLocation();
+  const active = (name: string) => location.pathname === name
+
   return (
     <StyledWrapper>
-      <Link to={'/'}>首页</Link>
-      <Link to={'/bookshelf'}>书架</Link>
-      <Link to={'/custom'}>自定义</Link>
-      <Link to={'/history'}>我的</Link>
+      <StyledLink active={active('/') } to={'/'}>首页</StyledLink>
+      <StyledLink active={active('/bookshelf')} to={'/bookshelf'}>书架</StyledLink>
+      <StyledLink active={active('/custom')} to={'/custom'}>自定义</StyledLink>
+      <StyledLink active={active('/setting')} to={'/setting'}>其他</StyledLink>
     </StyledWrapper>
   )
 }
@@ -27,4 +30,9 @@ const StyledWrapper = styled.div`
   background-color: #fff;
   box-sizing: border-box;
 `
+
+const StyledLink = styled(Link)<{ active: boolean }>`
+  color:  ${({ active }) => active ? '#333' : '#a7a7a7'};
+`
+
 export default Footer

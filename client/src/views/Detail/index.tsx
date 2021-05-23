@@ -84,10 +84,10 @@ const ListPage: React.FC = () => {
       <StyledMd style={{ fontSize: fontSizeStyle }} dangerouslySetInnerHTML={{ __html: detail?.content }}></StyledMd>
       <StyledFixed>
         <Space>
-          <Button type="primary" onClick={prev}>{
+          <Button onClick={prev}>{
             detail?.prev.id ? 'Prev' : 'Not'
           }</Button>
-          <Button type="primary" onClick={next}>{
+          <Button onClick={next}>{
             detail?.next.id ? 'Next' : 'Not'
           }</Button>
         </Space>

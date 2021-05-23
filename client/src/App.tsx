@@ -8,7 +8,7 @@ import Detail from './views/Detail';
 import Custom from './views/Custom';
 import Header from './components/Header';
 import Bookshelf from './views/Bookshelf';
-import History from './views/History';
+import Setting from './views/Setting';
 
 
 import './App.css';
@@ -44,12 +44,12 @@ function App() {
               <Bookshelf></Bookshelf>
             </Layout>
           </Route>
-          <Route path="/history" exact>
+          <Route path="/setting" exact>
             <Layout>
-              <History></History>
+              <Setting></Setting>
             </Layout>
           </Route>
-          <Route path="/:id/" exact>
+          <Route path="/:id" exact>
             <Layout>
               <List></List>
             </Layout>
@@ -66,6 +66,7 @@ function App() {
 }
 const StyledWrapper = styled.div`
 padding: 40px 0 0 0;
+height: 100%;
 `
 
 export default App;

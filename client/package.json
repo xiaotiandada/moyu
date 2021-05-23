@@ -17,9 +17,11 @@
     "i18next": "^19.8.4",
     "i18next-browser-languagedetector": "^6.0.1",
     "i18next-xhr-backend": "^3.2.2",
+    "js-cookie": "^2.2.1",
     "lodash": "^4.17.21",
     "lru-cache": "^6.0.0",
     "react": "^17.0.1",
+    "react-copy-to-clipboard": "^5.0.3",
     "react-dom": "^17.0.1",
     "react-i18next": "^11.8.5",
     "react-redux": "^7.2.2",
@@ -70,6 +72,7 @@
     ]
   },
   "devDependencies": {
+    "@types/js-cookie": "^2.2.6",
     "@types/lodash": "^4.14.169",
     "@types/react-redux": "^7.1.15",
     "@types/react-router-dom": "^5.1.7",

@@ -44,6 +44,9 @@ const StyledItem = styled.ul`
   grid-template-columns: repeat(3, 1fr);
   grid-row-gap: 10px;
   grid-column-gap: 10px;
+  & > a {
+    color: #333;
+  }
 `
 const StyledItemLi = styled.li`
   border: 1px solid #f1f1f1;
