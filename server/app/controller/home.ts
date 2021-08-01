@@ -1,6 +1,6 @@
 import { Controller } from 'egg';
 import * as jwt from 'jwt-simple';
-import * as ms from 'ms';
+import ms from 'ms';
 
 export default class HomeController extends Controller {
   public async index(): Promise<any> {

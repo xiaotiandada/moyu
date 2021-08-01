@@ -22,8 +22,8 @@ export default (appInfo: EggAppInfo) => {
   config.proxy = true;
 
   config.cors = {
-    origin: ctx => {
-      if (domainWhiteList.includes(ctx.request.header.origin)) {
+    origin: (ctx): any => {
+      if (domainWhiteList.includes(( ctx.request.header.origin ) as string)) {
         return ctx.request.header.origin;
       }
     },

@@ -1,4 +1,5 @@
 import client from './client'
+import store from 'store'
 
 interface ptwxzDetailProps {
   id: string
@@ -25,3 +26,20 @@ export function ptwxzList(params: { id: string }) {
 export function ptwxzDetail(params: ptwxzDetailProps) {
   return client.get('/api/ptwxz/detail', { params })
 }
+
+
+
+/**
+ * 同步配置文件
+ * @param data
+ * @returns
+ */
+export function asyncSystem(data: { content: any }) {
+  return client.post('/api/async/system', data, {
+    headers: {
+      'github-token': store.get('github-token') || ''
+    }
+  })
+}
+
+

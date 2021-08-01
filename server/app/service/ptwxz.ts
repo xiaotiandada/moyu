@@ -49,7 +49,6 @@ export default class Test extends Service {
       return false;
     }
   }
-
   public async index() {
     try {
       const res: any = await this.fetchPage(this.config.urlList.ptwxz);

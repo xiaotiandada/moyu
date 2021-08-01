@@ -1,11 +1,15 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import styled from 'styled-components'
 import { useParams, useHistory } from 'react-router-dom'
-import { Button, Slider, message, Space, BackTop } from 'antd'
+import { Button, Slider, message, Space, BackTop, Spin } from 'antd'
 import { ptwxzDetail } from '../../api/index'
 import store from 'store'
+import LoadingSpin from '../../components/LoadingSpin'
+import { asyncSystemContent } from '../../utils/index'
+import { asyncSystem } from '../../api/index'
 
 const ListPage: React.FC = () => {
+  const [loading, setLoading] = useState<boolean>(false)
   const [detail, setDetail] = useState<any>()
   const [fontSize, setFontSize] = useState<number>(1)
   const [fontSizeVisable, setFontSizeVisable] = useState<Boolean>(false)
@@ -14,7 +18,13 @@ const ListPage: React.FC = () => {
 
   useEffect(() => {
 
+    /**
+     * fetch
+     */
     const fetch = async () => {
+
+      setLoading(true)
+
       const res: any = await ptwxzDetail({
         id: decodeURIComponent(id),
         page: decodeURIComponent(page)
@@ -41,10 +51,22 @@ const ListPage: React.FC = () => {
 
         store.set('history', historyStore)
 
+        setLoading(false)
+
+        handleAsyncSystem()
       }
     }
 
+    /**
+     * 同步字体设置
+     */
+    const asyncFontSize = () => {
+      let fontSize = store.get('font-size') || 1
+      setFontSize(fontSize)
+    }
+
     fetch()
+    asyncFontSize()
   }, [id, page]);
 
   const prev = () => {
@@ -62,6 +84,24 @@ const ListPage: React.FC = () => {
     }
   }
 
+  /**
+   * 同步系统配置和历史记录
+   */
+  const handleAsyncSystem = async () => {
+    let data = asyncSystemContent()
+
+    try {
+      const res: any = await asyncSystem(data)
+      if (res.code === 0) {
+        console.log('同步成功')
+      } else {
+        console.log('同步失败')
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   const fontSizeStyle = useMemo(() => {
     let list: any = {
       0: '14px',
@@ -75,19 +115,23 @@ const ListPage: React.FC = () => {
   }, [fontSize])
 
   const handleChange = (value: number) => {
-    console.log('111', value)
+    store.set('font-size', value)
     setFontSize(value)
   }
 
   return (
     <StyledWrapper>
-      <StyledMd style={{ fontSize: fontSizeStyle }} dangerouslySetInnerHTML={{ __html: detail?.content }}></StyledMd>
+      {
+        loading ?
+        <LoadingSpin></LoadingSpin> :
+        <StyledMd style={{ fontSize: fontSizeStyle }} dangerouslySetInnerHTML={{ __html: detail?.content }}></StyledMd>
+      }
       <StyledFixed>
         <Space>
-          <Button onClick={prev}>{
+          <Button onClick={prev} loading={ loading }>{
             detail?.prev.id ? 'Prev' : 'Not'
           }</Button>
-          <Button onClick={next}>{
+          <Button onClick={next} loading={ loading }>{
             detail?.next.id ? 'Next' : 'Not'
           }</Button>
         </Space>

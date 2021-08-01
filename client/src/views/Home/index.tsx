@@ -3,6 +3,7 @@ import { ptwxz } from '../../api/index'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Footer from '../../components/Footer'
+import LoadingSpin from '../../components/LoadingSpin'
 
 const HomePage: React.FC = () => {
 
@@ -23,16 +24,21 @@ const HomePage: React.FC = () => {
 
 
   return (
-    <StyledItem>
+    <>
       {
-        list.map((i, idx) => (
-          <Link key={idx} to={`/${encodeURIComponent(i.id)}`}>
-            <StyledItemLi>{i.name}</StyledItemLi>
-          </Link>
-        ))
+        list.length === 0 ? <LoadingSpin></LoadingSpin> : null
       }
-      <Footer></Footer>
-    </StyledItem>
+      <StyledItem>
+        {
+          list.map((i, idx) => (
+            <Link key={idx} to={`/${encodeURIComponent(i.id)}`}>
+              <StyledItemLi>{i.name}</StyledItemLi>
+            </Link>
+          ))
+        }
+        <Footer></Footer>
+      </StyledItem>
+    </>
   )
 }
 
