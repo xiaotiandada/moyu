@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import styled from 'styled-components'
 import { useParams, useHistory } from 'react-router-dom'
-import { Button, Slider, message, Space, BackTop, Spin } from 'antd'
+import { Button, Slider, message, Space, BackTop } from 'antd'
 import { ptwxzDetail } from '../../api/index'
 import store from 'store'
 import LoadingSpin from '../../components/LoadingSpin'

@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -11,6 +10,7 @@ import Bookshelf from './views/Bookshelf';
 import Setting from './views/Setting';
 
 import { useAsync } from './hooks/useAsync'
+import { useMount } from 'ahooks'
 
 
 import './App.css';
@@ -20,9 +20,9 @@ function App() {
 
   const { asyncConfig } = useAsync()
 
-  useEffect(() => {
+  useMount(() => {
     asyncConfig()
-  }, []);
+  });
 
   const Layout = ({ children }: any) => {
     return (

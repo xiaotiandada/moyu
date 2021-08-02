@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react'
+import { useCallback } from 'react'
 import { asyncSystemGet } from '../api/index'
 import sotre from 'store'
 
