@@ -89,7 +89,7 @@ const ListPage: React.FC = () => {
   return (
     <StyledWrapper>
       <StyledUser>
-        { 
+        {
           isEmpty(ownerUser) ?
           <>
             <StyledUserInfo>
