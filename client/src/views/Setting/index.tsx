@@ -2,47 +2,70 @@ import React, { useState, useEffect } from 'react'
 import store from 'store'
 import styled from 'styled-components'
 import Footer from '../../components/Footer'
-import { Button, message, Input } from 'antd';
+import { Button, message, Input, Avatar, Space } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 import { clearAllCookie } from '../../utils/cookie'
-import { asyncSystem } from '../../api/index'
+import { asyncSystemUpdate } from '../../api/index'
 import { asyncSystemContent } from '../../utils/index'
+import { isEmpty } from 'lodash'
+import { useAsync } from '../../hooks/useAsync'
 
 const ListPage: React.FC = () => {
 
-  const [isLoggin, setIsLoggin] = useState<boolean>(false)
   const [githubToken, setGithubToken] = useState<string>('')
+  const [ownerUser, setOwnerUser] = useState<any>({})
+
+  const { asyncConfig } = useAsync()
 
   useEffect(() => {
     checkGithubToken()
   }, []);
 
+  /**
+   * 清除所有 cookie
+   */
   const clearCookie = () => {
     clearAllCookie()
     message.success('success')
   }
 
+  /**
+   * 清除 localstore
+   */
   const clearLocalStore = () => {
     store.clearAll()
     message.success('success')
   }
 
+  /**
+   * 检查 GitHub token
+   */
   const checkGithubToken = () => {
     let githubToken = store.get('github-token') || ''
+    let owner = store.get('owner') || {}
     if (githubToken) {
       setGithubToken(githubToken)
-      setIsLoggin(true)
+      setOwnerUser(owner)
     }
   }
 
   /**
    * Github 登录
    */
-  const handleGithubLogin = (token: string) => {
+  const handleGithubLogin = async (token: string) => {
     store.set('github-token', token)
+    await asyncConfig()
+    await checkGithubToken()
   }
+
+  /**
+   * Github 登出
+   */
   const handleGithubSignout = () => {
     store.remove('github-token')
+    store.remove('owner')
     setGithubToken('')
+    setOwnerUser({})
   }
 
   /**
@@ -52,7 +75,7 @@ const ListPage: React.FC = () => {
     let data = asyncSystemContent()
 
     try {
-      const res: any = await asyncSystem(data)
+      const res: any = await asyncSystemUpdate(data)
       if (res.code === 0) {
         message.success('同步成功')
       } else {
@@ -66,11 +89,23 @@ const ListPage: React.FC = () => {
   return (
     <StyledWrapper>
       <StyledUser>
-        <Input placeholder="github token" value={ githubToken } onChange={ (e) => setGithubToken(e.target.value) } />
-        {
-          isLoggin ?
-          <Button type="primary" size="small" onClick={handleGithubSignout}>登出</Button> :
-          <Button type="primary" size="small" onClick={() => handleGithubLogin(githubToken)}>登录</Button>
+        { 
+          isEmpty(ownerUser) ?
+          <>
+            <StyledUserInfo>
+              <Input placeholder="github token" value={ githubToken } onChange={ (e) => setGithubToken(e.target.value) } />
+            </StyledUserInfo>
+            <Button type="primary" size="small" onClick={() => handleGithubLogin(githubToken)}>登录</Button>
+          </>:
+          <>
+            <StyledUserInfo>
+              <Space>
+                <Avatar size={40} icon={<UserOutlined />} src={ownerUser.avatar_url} />
+                <span>{ ownerUser.login }</span>
+              </Space>
+            </StyledUserInfo>
+            <Button type="primary" size="small" onClick={handleGithubSignout}>登出</Button>
+          </>
         }
       </StyledUser>
 
@@ -117,6 +152,10 @@ const StyledUser = styled.div`
   padding: 16px 10px;
   margin: 10px 0;
   border: 1px solid rgba(247,247,247);
+`
+
+const StyledUserInfo = styled.div`
+  margin-bottom: 20px;
 `
 
 export default ListPage

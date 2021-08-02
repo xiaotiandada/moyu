@@ -34,8 +34,21 @@ export function ptwxzDetail(params: ptwxzDetailProps) {
  * @param data
  * @returns
  */
-export function asyncSystem(data: { content: any }) {
+export function asyncSystemUpdate(data: { content: any }) {
   return client.post('/api/async/system', data, {
+    headers: {
+      'github-token': store.get('github-token') || ''
+    }
+  })
+}
+
+/**
+ * 获取配置文件
+ * @param data 
+ * @returns 
+ */
+export function asyncSystemGet() {
+  return client.get('/api/async/system', {
     headers: {
       'github-token': store.get('github-token') || ''
     }

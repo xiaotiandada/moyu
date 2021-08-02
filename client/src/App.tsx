@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -10,11 +10,19 @@ import Header from './components/Header';
 import Bookshelf from './views/Bookshelf';
 import Setting from './views/Setting';
 
+import { useAsync } from './hooks/useAsync'
+
 
 import './App.css';
 import 'antd/dist/antd.css';
 
 function App() {
+
+  const { asyncConfig } = useAsync()
+
+  useEffect(() => {
+    asyncConfig()
+  }, []);
 
   const Layout = ({ children }: any) => {
     return (

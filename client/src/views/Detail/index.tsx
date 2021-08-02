@@ -6,7 +6,7 @@ import { ptwxzDetail } from '../../api/index'
 import store from 'store'
 import LoadingSpin from '../../components/LoadingSpin'
 import { asyncSystemContent } from '../../utils/index'
-import { asyncSystem } from '../../api/index'
+import { asyncSystemUpdate } from '../../api/index'
 
 const ListPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false)
@@ -91,7 +91,7 @@ const ListPage: React.FC = () => {
     let data = asyncSystemContent()
 
     try {
-      const res: any = await asyncSystem(data)
+      const res: any = await asyncSystemUpdate(data)
       if (res.code === 0) {
         console.log('同步成功')
       } else {

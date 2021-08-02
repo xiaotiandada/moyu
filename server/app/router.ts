@@ -19,6 +19,7 @@ export default (app: Application) => {
   router.get('/api/ptwxz/detail', controller.ptwxz.get);
 
   // async
-  router.post('/api/async/system', controller.async.index);
+  router.get('/api/async/system', controller.async.get);
+  router.post('/api/async/system', controller.async.update);
 
 };
