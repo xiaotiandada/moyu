@@ -9,7 +9,7 @@ const CustomPage: React.FC = () => {
   let history = useHistory();
   const [id, setId] = useState('')
   const [page, setPage] = useState('')
-  const [searchValue, setSearchValue] = useState('')
+  const [, setSearchValue] = useState('')
 
   const jump = () => {
     if (isEmpty(id) || isEmpty(page)) {
