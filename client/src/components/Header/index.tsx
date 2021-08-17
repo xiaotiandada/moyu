@@ -87,6 +87,7 @@ const StyledWrapper = styled.div`
   background-color: #fff;
   box-sizing: border-box;
   height: 40px;
+  z-index: 10;
   a {
     font-size: 14px;
     color: #333;

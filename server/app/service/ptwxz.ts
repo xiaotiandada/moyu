@@ -147,9 +147,13 @@ export default class Test extends Service {
       $('#guild').remove();
       $('#shop').remove();
       $('.toplink').remove();
-      // $('.bottomlink').remove();
+      $('.bottomlink').remove();
       $('#Commenddiv').remove();
       $('#feit2').remove();
+      $('#feit2').remove();
+      $('div[align=center]').remove();
+      $('table[align=center]').remove();
+      $('script').remove();
 
       const metaObj:any = {};
       $('head meta').each((_, el: any) => {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { ptwxzList } from '../../api/index'
 import { Link, useParams } from 'react-router-dom'
+import { Button } from "antd";
 import Footer from '../../components/Footer'
 import styled from 'styled-components'
 import LoadingSpin from '../../components/LoadingSpin'
@@ -17,7 +18,7 @@ const ListPage: React.FC = () => {
       })
       console.log('res', res)
       if (res.code === 0) {
-        setList(res.data)
+        setList(res.data.reverse())
       }
     }
 
@@ -32,8 +33,8 @@ const ListPage: React.FC = () => {
       }
       <StyledItem>
         {
-          list.map((i, idx) => (
-            <Link key={idx} to={{
+          list.map((i) => (
+            <Link key={`${i.id}${i.href}`} to={{
               pathname: `/${encodeURIComponent(id)}/${i.id}`,
             }}>
               <StyledItemLi>{i.name}</StyledItemLi>
@@ -56,6 +57,9 @@ const StyledItem = styled.ul`
   grid-column-gap: 4px;
   & > a {
     color: #333;
+  }
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(1, 1fr);
   }
 `
 const StyledItemLi = styled.li`

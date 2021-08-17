@@ -7,6 +7,7 @@ import store from 'store'
 import LoadingSpin from '../../components/LoadingSpin'
 import { asyncSystemContent } from '../../utils/index'
 import { asyncSystemUpdate } from '../../api/index'
+import { MenuOutlined } from '@ant-design/icons'
 
 const ListPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false)
@@ -136,6 +137,9 @@ const ListPage: React.FC = () => {
           }</Button>
         </Space>
         <Space>
+          <Button onClick={() => history.push(`/${id}`)}>
+            <MenuOutlined />
+          </Button>
           <Button onClick={() => setFontSizeVisable(!fontSizeVisable)}>A</Button>
         </Space>
         {
@@ -156,6 +160,11 @@ const StyledWrapper = styled.div`
 const StyledMd = styled.div`
   margin: 0;
   padding: 10px 10px 64px 10px;
+  max-width: 880px;
+  margin: 0 auto;
+  h1 {
+    text-align: center;
+  }
 `
 const StyledFixed = styled.div`
   position: fixed;
