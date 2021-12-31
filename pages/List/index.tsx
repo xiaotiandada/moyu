@@ -1,0 +1,75 @@
+import React, { useEffect, useState } from 'react'
+import { ptwxzList } from '../../api/index'
+import { Link, useParams } from 'react-router-dom'
+import Footer from '../../components/Footer'
+import styled from 'styled-components'
+import LoadingSpin from '../../components/LoadingSpin'
+
+const ListPage: React.FC = () => {
+  let { id } = useParams<{ id: string }>();
+  const [list, setList] = useState<any[]>([])
+
+  useEffect(() => {
+
+    const fetch = async () => {
+      const res: any = await ptwxzList({
+        id: decodeURIComponent(id)
+      })
+      console.log('res', res)
+      if (res.code === 0) {
+        setList(res.data.reverse())
+      }
+    }
+
+    fetch()
+  }, [id]);
+
+
+  return (
+    <>
+      {
+        list.length === 0 ? <LoadingSpin></LoadingSpin> : null
+      }
+      <StyledItem>
+        {
+          list.map((i) => (
+            <Link key={`${i.id}${i.href}`} to={{
+              pathname: `/${encodeURIComponent(id)}/${i.id}`,
+            }}>
+              <StyledItemLi>{i.name}</StyledItemLi>
+            </Link>
+          ))
+        }
+        <Footer></Footer>
+      </StyledItem>
+    </>
+  )
+}
+
+const StyledItem = styled.ul`
+  margin: 0;
+  padding: 10px;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-row-gap: 4px;
+  grid-column-gap: 4px;
+  & > a {
+    color: #333;
+  }
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+`
+const StyledItemLi = styled.li`
+  border: 1px solid #f1f1f1;
+  font-size: 14px;
+  margin: 0 auto;
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+`
+
+export default ListPage

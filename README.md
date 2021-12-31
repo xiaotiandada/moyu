@@ -1,36 +1,41 @@
-### moyu
+# TypeScript Next.js example
 
-[Demo](https://moyu.vercel.app/)
+This is a really simple project that shows the usage of Next.js with TypeScript.
 
-[数据来源](https://www.ptwxz.com/)
+## Deploy your own
 
-#### client
-- React
-- Antd
+Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
 
-### server
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-typescript&project-name=with-typescript&repository-name=with-typescript)
 
-- Node
-- Egg
+## How to use it?
 
-### 自定义使用
+Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
 
-因为主要以PC阅读为主，Mobile上字体较小可以导入阅读
+```bash
+npx create-next-app --example with-typescript with-typescript-app
+# or
+yarn create next-app --example with-typescript with-typescript-app
+```
 
-举例：https://www.ptwxz.com/html/3/3224/1630058.html
+Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
 
-id：3/3224
+## Notes
 
-page: 1630058
+This example shows how to integrate the TypeScript type system into Next.js. Since TypeScript is supported out of the box with Next.js, all we have to do is to install TypeScript.
 
-<img width="300" src="https://user-images.githubusercontent.com/24250627/119256586-f9f59380-bbf3-11eb-99dc-2211540a16fc.png" />
+```
+npm install --save-dev typescript
+```
 
+To enable TypeScript's features, we install the type declarations for React and Node.
 
-### interface
+```
+npm install --save-dev @types/react @types/react-dom @types/node
+```
 
-<img width="300" src="https://user-images.githubusercontent.com/24250627/119255338-e0e9e400-bbed-11eb-98ca-a8c8e89da5e6.png" />
-<img width="300" src="https://user-images.githubusercontent.com/24250627/119255350-eb0be280-bbed-11eb-8a23-6e7d9e33a014.png" />
+When we run `next dev` the next time, Next.js will start looking for any `.ts` or `.tsx` files in our project and builds it. It even automatically creates a `tsconfig.json` file for our project with the recommended settings.
 
+Next.js has built-in TypeScript declarations, so we'll get autocompletion for Next.js' modules straight away.
 
-> 仅供学习参考
-
+A `type-check` script is also added to `package.json`, which runs TypeScript's `tsc` CLI in `noEmit` mode to run type-checking separately. You can then include this, for example, in your `test` scripts.
