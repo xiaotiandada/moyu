@@ -9,7 +9,7 @@ import { MenuOutlined, HomeOutlined } from '@ant-design/icons'
 
 const Header: React.FC = () => {
   // let { id, page } = useParams<{ id: string, page: string }>()
-  let { id, page } = { id: 1, page: 10 }
+  let { id, page } = { id: '1', page: '10' }
 
   const onClick: any = async ({ key }: { key: string }) => {
     if (key === 'add') {
@@ -38,7 +38,7 @@ const Header: React.FC = () => {
           page: res.data.page,
         }
 
-        let idx  = historyStore.findIndex((i: any) => decodeURIComponent(i.id) === decodeURIComponent(id))
+        let idx  = historyStore.findIndex((i: any) => decodeURIComponent(i.id) === decodeURIComponent(id as string))
         if (~idx) {
           console.log('已存在')
           historyStore[idx] = data
@@ -67,7 +67,9 @@ const Header: React.FC = () => {
   return (
     <StyledWrapper>
       <Link href={'/'}>
-        <HomeOutlined />
+        <a>
+          <HomeOutlined />
+        </a>
       </Link>
       <Dropdown overlay={menu}>
         <StyledMore>

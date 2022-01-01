@@ -8,14 +8,14 @@ export function useAsync() {
     async () => {
       try {
         const res: any = await asyncSystemGet()
-      if (res.code === 0) {
+        if (res.code === 0) {
 
-        const { history = [], fontSize = 1, owner } = res.data
+          const { history = [], fontSize = 1, owner } = res.data
 
-        sotre.set('history', history)
-        sotre.set('font-size', fontSize)
-        sotre.set('owner', owner)
-      }
+          sotre.set('history', history)
+          sotre.set('font-size', fontSize)
+          sotre.set('owner', owner)
+        }
       } catch (e) {
         console.log(e)
       }

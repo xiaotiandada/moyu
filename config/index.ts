@@ -1,0 +1,1 @@
+export const PTWXZ_API = 'https://www.ptwxz.com'

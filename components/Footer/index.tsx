@@ -2,12 +2,12 @@ import React from 'react'
 // import { Link, useLocation } from 'react-router-dom'
 import Link from 'next/link'
 import styled from 'styled-components'
+import { useRouter } from 'next/router'
+
 
 const Footer: React.FC = () => {
-
-  // let location = useLocation()
-  // const active = (name: string) => location.pathname === name
-  const active = (name: string) => false
+  const router = useRouter()
+  const active = (name: string) => router.pathname === name
 
   return (
     <StyledWrapper>
