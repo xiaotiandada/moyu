@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import Footer from '../../components/Footer'
 import { Input, Button, message, Card } from 'antd'
+import { useRouter } from 'next/router'
 import { isEmpty } from 'lodash'
 
 const CustomPage: React.FC = () => {
-  let history = useHistory();
+  const router = useRouter()
+
   const [id, setId] = useState('')
   const [page, setPage] = useState('')
   const [, setSearchValue] = useState('')
@@ -16,7 +17,7 @@ const CustomPage: React.FC = () => {
       message.warning('not id or page')
       return
     }
-    history.push(`/${encodeURIComponent(id)}/${page}`);
+    router.push(`/${encodeURIComponent(id)}/${page}`)
   }
 
   return (

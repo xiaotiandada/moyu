@@ -8,8 +8,8 @@ const handler = (_req: NextApiRequest, res: NextApiResponse) => {
     }
 
     res.status(200).json(sampleUserData)
-  } catch (err) {
-    res.status(500).json({ statusCode: 500, message: err.message })
+  } catch (e: any) {
+    res.status(500).json({ statusCode: 500, message: e.message })
   }
 }
 

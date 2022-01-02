@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import store from 'store'
 import styled from 'styled-components'
 import Footer from '../../components/Footer'
-import { Button, message, Input, Avatar, Space } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import { Button, message, Input, Avatar, Space } from 'antd'
+import { UserOutlined } from '@ant-design/icons'
 import { clearAllCookie } from '../../utils/cookie'
-import { asyncSystemUpdate } from '../../api/index'
-import { asyncSystemContent } from '../../utils/index'
+// import { asyncSystemUpdate } from '../../api/index'
+// import { asyncSystemContent } from '../../utils/index'
 import { isEmpty } from 'lodash'
 import { useAsync } from '../../hooks/useAsync'
 
@@ -19,7 +19,7 @@ const ListPage: React.FC = () => {
 
   useEffect(() => {
     checkGithubToken()
-  }, []);
+  }, [])
 
   /**
    * 清除所有 cookie
@@ -72,18 +72,18 @@ const ListPage: React.FC = () => {
    * 同步系统配置和历史记录
    */
   const handleAsyncSystem = async () => {
-    let data = asyncSystemContent()
+    // let data = asyncSystemContent()
 
-    try {
-      const res: any = await asyncSystemUpdate(data)
-      if (res.code === 0) {
-        message.success('同步成功')
-      } else {
-        message.error('同步失败')
-      }
-    } catch (e) {
-      console.log(e)
-    }
+    // try {
+    //   const res: any = await asyncSystemUpdate(data)
+    //   if (res.code === 0) {
+    //     message.success('同步成功')
+    //   } else {
+    //     message.error('同步失败')
+    //   }
+    // } catch (e) {
+    //   console.log(e)
+    // }
   }
 
   return (
@@ -91,21 +91,21 @@ const ListPage: React.FC = () => {
       <StyledUser>
         {
           isEmpty(ownerUser) ?
-          <>
-            <StyledUserInfo>
-              <Input placeholder="github token" value={ githubToken } onChange={ (e) => setGithubToken(e.target.value) } />
-            </StyledUserInfo>
-            <Button type="primary" size="small" onClick={() => handleGithubLogin(githubToken)}>登录</Button>
-          </>:
-          <>
-            <StyledUserInfo>
-              <Space>
-                <Avatar size={40} icon={<UserOutlined />} src={ownerUser.avatar_url} />
-                <span>{ ownerUser.login }</span>
-              </Space>
-            </StyledUserInfo>
-            <Button type="primary" size="small" onClick={handleGithubSignout}>登出</Button>
-          </>
+            <>
+              <StyledUserInfo>
+                <Input placeholder="github token" value={ githubToken } onChange={ (e) => setGithubToken(e.target.value) } />
+              </StyledUserInfo>
+              <Button type="primary" size="small" onClick={() => handleGithubLogin(githubToken)}>登录</Button>
+            </>:
+            <>
+              <StyledUserInfo>
+                <Space>
+                  <Avatar size={40} icon={<UserOutlined />} src={ownerUser.avatar_url} />
+                  <span>{ ownerUser.login }</span>
+                </Space>
+              </StyledUserInfo>
+              <Button type="primary" size="small" onClick={handleGithubSignout}>登出</Button>
+            </>
         }
       </StyledUser>
 

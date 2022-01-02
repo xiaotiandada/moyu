@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import styled from 'styled-components'
 import Footer from '../../components/Footer'
 import store from 'store'
@@ -15,20 +15,22 @@ const HomePage: React.FC = () => {
     let historyStore = store.get('history') || []
     setList(historyStore)
 
-  }, []);
+  }, [])
 
 
   return (
     <StyledWrapper>
       {
         !isEmpty(list) ? <StyledItem>
-        {
-          list.map((i, idx) => (
-            <Link key={idx} to={`/${encodeURIComponent(i.id)}/${i.page}`}>
-              <StyledItemLi>{i.title}</StyledItemLi>
-            </Link>
-          ))
-        }
+          {
+            list.map((i, idx) => (
+              <Link key={idx} href={`/${encodeURIComponent(i.id)}/${i.page}`}>
+                <a>
+                  <StyledItemLi>{i.title}</StyledItemLi>
+                </a>
+              </Link>
+            ))
+          }
         </StyledItem> : <Empty description={'暂无书籍 📚'} />
       }
       <Footer></Footer>
