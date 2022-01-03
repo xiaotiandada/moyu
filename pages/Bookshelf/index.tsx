@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Footer from '../../components/Footer'
 import store from 'store'
 import { Empty } from 'antd'
 import { isEmpty } from 'lodash'
 
-const HomePage: React.FC = () => {
 
+const HomePage: React.FC = () => {
   const [list, setList] = useState<any[]>([])
 
   useEffect(() => {
-
     let historyStore = store.get('history') || []
     setList(historyStore)
-
   }, [])
 
 
@@ -24,7 +21,7 @@ const HomePage: React.FC = () => {
         !isEmpty(list) ? <StyledItem>
           {
             list.map((i, idx) => (
-              <Link key={idx} href={`/${encodeURIComponent(i.id)}/${i.page}`}>
+              <Link key={idx} href={`/p/${encodeURIComponent(i.id)}/${encodeURIComponent(i.page)}`}>
                 <a>
                   <StyledItemLi>{i.title}</StyledItemLi>
                 </a>
@@ -33,7 +30,6 @@ const HomePage: React.FC = () => {
           }
         </StyledItem> : <Empty description={'暂无书籍 📚'} />
       }
-      <Footer></Footer>
     </StyledWrapper>
 
   )

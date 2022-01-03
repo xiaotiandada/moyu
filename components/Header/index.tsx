@@ -1,82 +1,28 @@
 import React from 'react'
-// import { Link, useParams } from 'react-router-dom'
 import Link from 'next/link'
 import styled from 'styled-components'
-import { Menu, Dropdown, message } from 'antd'
-// import { ptwxzDetail } from '../../api/index'
-import store from 'store'
-import { MenuOutlined, HomeOutlined } from '@ant-design/icons'
+import { HomeOutlined, ArrowLeftOutlined, GithubOutlined } from '@ant-design/icons'
+import { useRouter } from 'next/router'
 
 const Header: React.FC = () => {
-  // let { id, page } = useParams<{ id: string, page: string }>()
-  let { id, page } = { id: '1', page: '10' }
-
-  const onClick: any = async ({ key }: { key: string }) => {
-    if (key === 'add') {
-
-      console.log('id', id, page)
-      if (!id && !page) {
-        message.warning('请在小说内使用')
-        return
-      }
-
-      // const res: any = await ptwxzDetail({
-      //   id: decodeURIComponent(id),
-      //   page: decodeURIComponent(page)
-      // })
-      const res: any = {
-        code: -1
-      }
-      console.log('res', res)
-      if (res.code === 0) {
-
-        let historyStore = store.get('history') || []
-        let data = {
-          title: res.data.title,
-          subtitle: res.data.subtitle,
-          id: res.data.id,
-          page: res.data.page,
-        }
-
-        let idx  = historyStore.findIndex((i: any) => decodeURIComponent(i.id) === decodeURIComponent(id as string))
-        if (~idx) {
-          console.log('已存在')
-          historyStore[idx] = data
-        } else {
-          historyStore.push(data)
-        }
-
-        store.set('history', historyStore)
-      }
-    } else if (key === 'github') {
-      window.open('https://github.com/xiaotiandada/moyu')
-    }
-  }
-
-  const menu = () => (
-    <Menu onClick={onClick}>
-      <Menu.Item key="add">
-        加入书架
-      </Menu.Item>
-      <Menu.Item key="github">
-        Github
-      </Menu.Item>
-    </Menu>
-  )
+  const router = useRouter()
 
   return (
     <StyledWrapper>
-      <Link href={'/'}>
-        <a>
-          <HomeOutlined />
-        </a>
-      </Link>
-      <Dropdown overlay={menu}>
-        <StyledMore>
-          <MenuOutlined />
-        </StyledMore>
-      </Dropdown>
-
+      {
+        router.pathname === '/' ?
+          <Link href={'/'}>
+            <a>
+              <HomeOutlined />
+            </a>
+          </Link> :
+          <span onClick={() => router.back()}>
+            <ArrowLeftOutlined />
+          </span>
+      }
+      <a href="https://github.com/xiaotiandada/moyu" rel="noopener noreferrer" target='_blank'>
+        <GithubOutlined />
+      </a>
     </StyledWrapper>
   )
 }
@@ -101,5 +47,4 @@ const StyledWrapper = styled.div`
   }
 `
 
-const StyledMore = styled.div``
 export default Header

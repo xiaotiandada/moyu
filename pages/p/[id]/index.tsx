@@ -1,11 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
-import Footer from '../../../components/Footer'
 import styled from 'styled-components'
 import LoadingSpin from '../../../components/LoadingSpin'
 import useSWR from 'swr'
 import { useRouter } from 'next/router'
-import Layout from '../../../components/Layout'
 
 const ListPage: React.FC = () => {
   const router = useRouter()
@@ -15,27 +13,20 @@ const ListPage: React.FC = () => {
   const fetcher = (...args: any[]) => fetch(...args).then(res => res.json())
   const { data, error } = useSWR(`/api/ptwxz/list?id=${decodeURIComponent(id as string)}`, fetcher)
   if (error) return <div>failed to load</div>
-  if (!data) return <div>loading...</div>
-
+  if (!data) return <LoadingSpin></LoadingSpin>
 
   return (
-    <Layout title="Home | Next.js + TypeScript Example">
+    <StyledItem>
       {
-        data.data.length === 0 ? <LoadingSpin></LoadingSpin> : null
+        (data.data.reverse()).map((i: any) => (
+          <Link key={`${i.id}${i.href}`} href={`/p/${encodeURIComponent(id as string)}/${i.id}`}>
+            <a>
+              <StyledItemLi>{i.name}</StyledItemLi>
+            </a>
+          </Link>
+        ))
       }
-      <StyledItem>
-        {
-          (data.data.reverse()).map((i: any) => (
-            <Link key={`${i.id}${i.href}`} href={`/p/${encodeURIComponent(id as string)}/${i.id}`}>
-              <a>
-                <StyledItemLi>{i.name}</StyledItemLi>
-              </a>
-            </Link>
-          ))
-        }
-        <Footer></Footer>
-      </StyledItem>
-    </Layout>
+    </StyledItem>
   )
 }
 
