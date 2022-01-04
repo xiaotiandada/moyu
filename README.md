@@ -4,6 +4,8 @@
 
 - [数据来源](https://www.ptwxz.com)
 
+主要以 PC 阅读为主，Mobile 上字体较小可以导入阅读
+
 ## Deploy your own
 
 Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
@@ -23,17 +25,22 @@ A: 有条件的可以使用 Alook（好用👍）
 
 ## 自定义使用
 
-因为主要以PC阅读为主，Mobile上字体较小可以导入阅读
-
 举例：https://www.ptwxz.com/html/3/3224/1630058.html
 
-<img width="300" src="https://user-images.githubusercontent.com/24250627/119256586-f9f59380-bbf3-11eb-99dc-2211540a16fc.png" />
+<img width="200" src="https://user-images.githubusercontent.com/24250627/148113731-b1920faf-17fe-4ef9-8c68-ff6922243de2.png" />
 
 
 ## 界面
 
-<img width="300" src="https://user-images.githubusercontent.com/24250627/119255338-e0e9e400-bbed-11eb-98ca-a8c8e89da5e6.png" />
-<img width="300" src="https://user-images.githubusercontent.com/24250627/119255350-eb0be280-bbed-11eb-8a23-6e7d9e33a014.png" />
+<div>
+  <img width="200" src="https://user-images.githubusercontent.com/24250627/148113586-73478e8b-2fb2-4005-9714-70395690cf62.png" />
+  <img width="200" src="https://user-images.githubusercontent.com/24250627/148113883-be492354-bde6-44b1-947f-9fab7b4bb376.png" />
+  <img width="200" src="https://user-images.githubusercontent.com/24250627/148113691-c52ff794-5b2f-427d-a54e-56b089b2436c.png" />
+  <img width="200" src="https://user-images.githubusercontent.com/24250627/148113731-b1920faf-17fe-4ef9-8c68-ff6922243de2.png" />
+  <img width="200" src="https://user-images.githubusercontent.com/24250627/148113792-ddcbaaab-a272-44d7-94d9-cb2d9f92defd.png" />
+  <img width="200" src="https://user-images.githubusercontent.com/24250627/148114117-720bdf15-ac9e-4b1f-ba30-19de21a4f11c.png" />
+ </div>
+
 
 
 > 仅供学习参考
