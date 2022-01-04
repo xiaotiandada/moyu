@@ -4,18 +4,20 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import LoadingSpin from '../components/LoadingSpin'
 import useSWR from 'swr'
+import ErrorTip from '../components/ErrorTip'
+import { fetcher } from '../utils'
+import { Response } from '../typings'
+import type { ListData } from '../typings'
 
 const IndexPage = () => {
-  // @ts-ignore
-  const fetcher = (...args: any[]) => fetch(...args).then(res => res.json())
-  const { data, error } = useSWR('/api/ptwxz', fetcher)
-  if (error) return <div>failed to load</div>
+  const { data, error } = useSWR<Response<ListData[]>>('/api/ptwxz', fetcher)
+  if (error) return <ErrorTip></ErrorTip>
   if (!data) return <LoadingSpin></LoadingSpin>
 
   return (
     <StyledItem>
       {
-        data.data.map((i: any) => (
+        data.data.map((i) => (
           <Link key={i.id} href={`/p/${encodeURIComponent(i.id)}`}>
             <a>
               <StyledItemLi>{i.name}</StyledItemLi>

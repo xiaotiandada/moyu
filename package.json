@@ -1,5 +1,5 @@
 {
-  "name": "with-typescript",
+  "name": "mo-yu",
   "version": "1.0.0",
   "scripts": {
     "dev": "next",
@@ -10,24 +10,15 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^1.7.1",
     "antd": "^4.18.2",
     "axios": "^0.24.0",
     "cheerio": "^1.0.0-rc.10",
-    "classnames": "^2.2.6",
-    "date-fns": "^2.18.0",
-    "gray-matter": "^4.0.2",
     "iconv-lite": "^0.6.3",
     "js-cookie": "^3.0.1",
     "lodash": "^4.17.21",
     "next": "^12.0.7",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-redux": "^7.2.6",
-    "redux": "^4.1.2",
-    "redux-persist": "^6.0.0",
-    "remark": "^13.0.0",
-    "remark-html": "^13.0.1",
+    "react-dom": "^17.0.2",
     "store": "^2.0.12",
     "swr": "^1.1.2",
     "tunnel": "^0.0.6"
@@ -35,12 +26,10 @@
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",
     "@commitlint/config-conventional": "^15.0.0",
-    "@types/classnames": "^2.2.11",
     "@types/js-cookie": "^3.0.1",
     "@types/lodash": "^4.14.178",
     "@types/node": "^12.12.21",
     "@types/react": "^16.9.16",
-    "@types/react-dom": "^16.9.4",
     "@types/store": "^2.0.2",
     "@types/styled-components": "^5.1.19",
     "@types/tunnel": "^0.0.3",

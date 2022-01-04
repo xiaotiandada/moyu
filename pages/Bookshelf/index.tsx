@@ -4,13 +4,14 @@ import styled from 'styled-components'
 import store from 'store'
 import { Empty } from 'antd'
 import { isEmpty } from 'lodash'
+import { HistoryData } from '../../typings'
 
 
 const HomePage: React.FC = () => {
-  const [list, setList] = useState<any[]>([])
+  const [list, setList] = useState<HistoryData[]>([])
 
   useEffect(() => {
-    let historyStore = store.get('history') || []
+    let historyStore: HistoryData[] = store.get('history') || []
     setList(historyStore)
   }, [])
 

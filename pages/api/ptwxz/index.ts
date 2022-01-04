@@ -3,6 +3,7 @@ import * as cheerio from 'cheerio'
 import * as iconv from 'iconv-lite'
 import { fetchPage } from './fetch'
 import { PTWXZ_API } from '../../../config'
+import { ListData } from '../../../typings'
 
 
 const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
@@ -33,7 +34,7 @@ const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
     }
 
     const rightAllDom = $('#right .ultop').slice(0, 1)
-    const data: {}[] = []
+    const data: ListData[] = []
     rightAllDom.each((_, el) => {
       $(el).find('li').each((_, elem) => {
         const id = $(elem).find('a').attr('href')
@@ -41,7 +42,7 @@ const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
           const idContent = matchStr(id, '/bookinfo/', '.html')
           data.push({
             id: idContent && idContent.length ? idContent[0] : '',
-            href: $(elem).find('a').attr('href'),
+            href: $(elem).find('a').attr('href') || '',
             name: $(elem).text(),
           })
         }

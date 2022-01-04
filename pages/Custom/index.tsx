@@ -7,13 +7,12 @@ import { matchStr } from '../../utils/reg'
 
 const CustomPage: React.FC = () => {
   const router = useRouter()
-
   const [customUrl, setCustomUrl] = useState('')
 
   const jump = () => {
 
     if (isEmpty(customUrl)) {
-      message.warning('please input url')
+      message.warning('Enter url')
       return
     }
 
@@ -21,7 +20,7 @@ const CustomPage: React.FC = () => {
     const result = resultArr ? resultArr[0].split('/'): ''
 
     if (!result) {
-      message.warning('url format error')
+      message.warning('Url format error')
       return
     }
 
@@ -39,7 +38,7 @@ const CustomPage: React.FC = () => {
     <StyledWrapper>
       <Card style={{ marginTop: 20 }}>
         <StyledWrapperItem>
-          <Input placeholder="Please input url" onChange={e => setCustomUrl(e.target.value)} />
+          <Input placeholder="Enter url" onChange={e => setCustomUrl(e.target.value)} />
         </StyledWrapperItem>
         <Button onClick={jump} style={{width: '100%'}}>跳转</Button>
       </Card>

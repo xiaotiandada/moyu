@@ -1,28 +1,46 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import styled from 'styled-components'
 import { Button, Slider, message, Space, BackTop } from 'antd'
 import store from 'store'
 import LoadingSpin from '../../../components/LoadingSpin'
-import { MenuOutlined } from '@ant-design/icons'
+import { MenuOutlined, HomeOutlined } from '@ant-design/icons'
 import useSWR from 'swr'
 import { useRouter } from 'next/router'
-const fontSizeStyle = '16px'
+import { fetcher } from '../../../utils'
+import ErrorTip from '../../../components/ErrorTip'
+import { HistoryData, Response } from '../../../typings'
+import type { PostData } from '../../../typings'
 
 const ListPage: React.FC = () => {
   const [fontSize, setFontSize] = useState<number>(1)
   const [fontSizeVisable, setFontSizeVisable] = useState<Boolean>(false)
-
   const router = useRouter()
-  const { id, page } = router.query
+  const id = router.query.id as string
+  const page = router.query.page as string
 
-  // @ts-ignore
-  const fetcher = (...args: any[]) => fetch(...args).then(res => res.json())
-  const { data, error } = useSWR(`/api/ptwxz/get?id=${decodeURIComponent(id as string)}&page=${decodeURIComponent(page as string)}`, fetcher)
-  if (error) return <div>failed to load</div>
+  const fontSizeStyle = useMemo(() => {
+    const list: { [key: number]: string } = {
+      0: '14px',
+      1: '16px',
+      2: '18px',
+      3: '20px',
+      4: '22px',
+      5: '24px',
+    }
+    return list[fontSize] || '16px'
+  }, [fontSize])
+
+  useEffect(() => {
+    const val = store.get('font-size') || 1
+    setFontSize(Number(val))
+  }, [])
+
+  const { data, error } = useSWR<Response<PostData>>(`/api/ptwxz/get?id=${decodeURIComponent(id)}&page=${decodeURIComponent(page)}`, fetcher)
+  if (error) return <ErrorTip></ErrorTip>
   if (!data) return <LoadingSpin></LoadingSpin>
   const { data: detail } = data
 
-  let historyStore = store.get('history') || []
+  let historyStore: HistoryData[] = store.get('history') || []
   let bookData = {
     title: detail.title,
     subtitle: detail.subtitle,
@@ -30,9 +48,8 @@ const ListPage: React.FC = () => {
     page: detail.page,
   }
 
-  let idx  = historyStore.findIndex((i: any) => decodeURIComponent(i.id) === decodeURIComponent(id as string))
+  let idx  = historyStore.findIndex((i) => decodeURIComponent(i.id) === decodeURIComponent(id))
   if (~idx) {
-    console.log('已存在')
     historyStore[idx] = bookData
   } else {
     historyStore.push(bookData)
@@ -42,7 +59,7 @@ const ListPage: React.FC = () => {
 
   const prev = () => {
     if (detail?.prev.id) {
-      router.push(`/p/${encodeURIComponent(id as string)}/${encodeURIComponent(detail?.prev.id as string)}`)
+      router.push(`/p/${encodeURIComponent(id)}/${encodeURIComponent(detail?.prev.id)}`)
     } else {
       message.error('没有上一章')
     }
@@ -74,6 +91,9 @@ const ListPage: React.FC = () => {
           }</Button>
         </Space>
         <Space>
+          <Button onClick={() => router.push('/')}>
+            <HomeOutlined />
+          </Button>
           <Button onClick={() => router.push(`/${encodeURIComponent(id as string)}`)}>
             <MenuOutlined />
           </Button>

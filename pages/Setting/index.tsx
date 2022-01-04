@@ -1,6 +1,6 @@
 import React from 'react'
 import store from 'store'
-import { Button, message} from 'antd'
+import { Button, message, Popconfirm} from 'antd'
 import styled from 'styled-components'
 import { clearAllCookie } from '../../utils/cookie'
 
@@ -21,11 +21,15 @@ const ListPage: React.FC = () => {
     <StyledWrapper>
       <StyledItem>
         <span>localStorage</span>
-        <Button type="primary" danger size="small" onClick={clearLocalStore}>清理</Button>
+        <Popconfirm placement="topLeft" title={'您确定要清理？'} onConfirm={clearLocalStore} okText="Yes" cancelText="No">
+          <Button type="primary" danger size="small">清理</Button>
+        </Popconfirm>
       </StyledItem>
       <StyledItem>
         <span>cookie</span>
-        <Button type="primary" danger size="small" onClick={clearCookie}>清理</Button>
+        <Popconfirm placement="topLeft" title={'您确定要清理？'} onConfirm={clearCookie} okText="Yes" cancelText="No">
+          <Button type="primary" danger size="small">清理</Button>
+        </Popconfirm>
       </StyledItem>
     </StyledWrapper>
   )
@@ -33,8 +37,6 @@ const ListPage: React.FC = () => {
 
 const StyledWrapper = styled.div`
   padding: 10px;
-  height: 100%;
-  background: rgba(244, 245, 247);
 `
 const StyledItem = styled.div`
   background-color: #fff;
@@ -45,6 +47,7 @@ const StyledItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-shadow: 0 2px 10px 2px rgba(0, 0, 0, .08);
   span {
     font-size: 14px;
   }

@@ -4,6 +4,7 @@ import { fetchPage } from './fetch'
 import * as iconv from 'iconv-lite'
 import * as cheerio from 'cheerio'
 import { isEmpty } from 'lodash'
+import { ListData } from '../../../typings'
 
 const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
   if (_req.method !== 'GET') {
@@ -27,7 +28,7 @@ const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
     const r = iconv.decode(result.data, 'gb2312')
     const $ = cheerio.load(r)
 
-    const listData: { id: string, href: string, name: string }[] = []
+    const listData: ListData[] = []
     $('ul li').each((_, el) => {
       // console.log('el', $(el).text());
       const name = $(el).text()
