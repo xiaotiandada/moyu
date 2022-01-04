@@ -8,31 +8,24 @@
 
 Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-typescript&project-name=with-typescript&repository-name=with-typescript)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/xiaotiandada/moyu.git)
 
 ## Why?
 
-Q: ...
+Q: 为什么写这个？
 
-A: ...
+A: 因为手机看 “飘天文学” 体验不太好
 
-Q: ...
+Q: 有更好的推荐吗？
 
-A: ...
+A: 有条件的可以使用 Alook（好用👍）
 
-Q: ...
-
-A: ...
 
 ## 自定义使用
 
 因为主要以PC阅读为主，Mobile上字体较小可以导入阅读
 
 举例：https://www.ptwxz.com/html/3/3224/1630058.html
-
-id：3/3224
-
-page: 1630058
 
 <img width="300" src="https://user-images.githubusercontent.com/24250627/119256586-f9f59380-bbf3-11eb-99dc-2211540a16fc.png" />
 
