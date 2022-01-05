@@ -22,6 +22,8 @@ Q: 有更好的推荐吗？
 
 A: 有条件的可以使用 Alook（好用👍）
 
+A: 仅供学习参考，支持正版
+
 
 ## 自定义使用
 
@@ -40,7 +42,3 @@ A: 有条件的可以使用 Alook（好用👍）
   <img width="200" src="https://user-images.githubusercontent.com/24250627/148113792-ddcbaaab-a272-44d7-94d9-cb2d9f92defd.png" />
   <img width="200" src="https://user-images.githubusercontent.com/24250627/148114117-720bdf15-ac9e-4b1f-ba30-19de21a4f11c.png" />
  </div>
-
-
-
-> 仅供学习参考
