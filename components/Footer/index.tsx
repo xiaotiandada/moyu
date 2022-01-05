@@ -49,14 +49,15 @@ const StyledWrapper = styled.section`
   right: 0;
   bottom: 0;
   border-top: 1px solid #f1f1f1;
-  padding: 16px 0;
+  padding: 0;
+  height: 40px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   background-color: #fff;
   box-sizing: border-box;
   a {
-    font-size: 14px;
+    font-size: 12px;
   }
 `
 

@@ -83,21 +83,21 @@ const ListPage: React.FC = () => {
       <StyledMd style={{ fontSize: fontSizeStyle }} dangerouslySetInnerHTML={{ __html: detail?.content }}></StyledMd>
       <StyledFixed>
         <Space>
-          <Button onClick={prev}>{
+          <Button onClick={prev} size='small'>{
             detail?.prev.id ? 'Prev' : 'Not'
           }</Button>
-          <Button onClick={next}>{
+          <Button onClick={next} size='small'>{
             detail?.next.id ? 'Next' : 'Not'
           }</Button>
         </Space>
         <Space>
-          <Button onClick={() => router.push('/')}>
+          <Button onClick={() => router.push('/')} size='small'>
             <HomeOutlined />
           </Button>
-          <Button onClick={() => router.push(`/${encodeURIComponent(id as string)}`)}>
+          <Button onClick={() => router.push(`/${encodeURIComponent(id as string)}`)} size='small'>
             <MenuOutlined />
           </Button>
-          <Button onClick={() => setFontSizeVisable(!fontSizeVisable)}>A</Button>
+          <Button onClick={() => setFontSizeVisable(!fontSizeVisable)} size='small'>A</Button>
         </Space>
         {
           fontSizeVisable ? <StyledSlider>
@@ -131,17 +131,20 @@ const StyledFixed = styled.div`
   background-color: #fff;
   display: flex;
   justify-content: space-between;
-  height: 50px;
+  height: 40px;
   padding: 0 10px;
   border-top: 1px solid #f1f1f1;
   box-sizing: border-box;
+  .ant-btn-sm {
+    font-size: 12px;
+  }
 `
 const StyledSlider = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: fixed;
-  bottom: 70px;
+  bottom: 40px;
   left: 0;
   right: 0;
   background: #fff;

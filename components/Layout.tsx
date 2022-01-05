@@ -31,7 +31,7 @@ const Layout: FC<Props> = ({ children, title = 'MoYu' }) => {
 }
 
 const StyledWrapper = styled.section`
-  padding: 40px 0 55px 0;
+  padding: 40px 0;
 `
 
 export default Layout
